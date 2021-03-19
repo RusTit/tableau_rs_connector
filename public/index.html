@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>windsor.ai JSON/XML Web Data Connector</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A windsor.ai Tableau Web Data Connector for connecting to XML and JSON."
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/core-js-bundle@3.6.5/minified.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.2.0/papaparse.min.js"></script>
+    <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js"></script>
+    <script src="/script.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-2 px-md-4 bg-white border-bottom box-shadow">
+    <nav class="my-0 px-5 mr-md-auto d-flex align-items-center flex-wrap">
+      <a class="navbar-brand">
+        <img src="https://onboard.windsor.ai/static/img/windsor-dark.png" class="p-2 d-inline-block align-center" alt="Windsor AI" height="48">
+      </a>
+      <h5 id="page-title" class="p-2 text-nowrap d-inline mb-0">Analytics + Ad data connector. Get all your marketing data into Tableau.</h5>
+    </nav>
+    <a id="register-button" role="button" class="btn btn-outline-primary" href="https://onboard.windsor.ai">Sign up</a>
+  </div>
+    <div class="container">
+      <div class="card" id="dataInput">
+        <div class="card-body">
+          <h5 class="card-title">Enter a URL for JSON/XML data or your windsor API url:</h5>
+          <div class="form-group row">
+            <label for="url" class="col-auto col-form-label">Url:</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="url">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="method" class="col-auto col-form-label">Method:</label>
+            <div class="col-auto">
+              <select id="method" class="custom-select">
+                <option value="GET" selected>GET</option>
+                <option value="POST">POST</option>
+              </select>
+            </div>
+          </div>
+          <div id="dragdrop" class="dragdrop">
+            <b>Or</b> drag & drop a JSON/XML file here
+          </div>
+          <p class="label"><b>Or</b> paste JSON/XML data below:</p>
+          <textarea id="paste" rows="6" cols="50"></textarea>
+          <button class="btn btn-primary" onclick="_next()">Next</button>
+          <div class="error"></div>
+        </div>
+      </div>
+
+      <div class="card" id="fieldInput" style="display: none;">
+        <div class="card-body">
+        <h5 class="card-title">Select which columns to bring in.</h5>
+        <div class="tables" id="tables">
+          <div class="table" data-tableid="0">
+            <p class="label">Table Name:</p>
+            <input data-tableid="0" type="text" placeholder="My Data" />
+            <div class="selections">
+              <span
+                ><a onclick="_selectAll(this)" data-tableid="0"
+                  >Select All</a
+                ></span
+              >
+              <span
+                ><a onclick="_clearAll(this)" data-tableid="0"
+                  >Clear All</a
+                ></span
+              >
+            </div>
+            <div class="fields" data-tableid="0">No data fields found</div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" onclick="_addTable()">+ Add Table</button>
+        <button class="btn btn-primary" onclick="_submitDataToTableau()">Submit</button>
+        <div class="error"></div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

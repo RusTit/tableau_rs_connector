@@ -1,7 +1,8 @@
+use log::info;
 use std::env;
 use warp::Filter;
-use log::{info};
-use simple_logger::SimpleLogger;
+// use simple_logger::SimpleLogger;
+use pretty_env_logger;
 extern crate dotenv;
 
 use dotenv::dotenv;
@@ -21,16 +22,19 @@ fn get_http_port() -> u16 {
 
 #[tokio::main]
 async fn main() {
-    SimpleLogger::new().init().unwrap();
+    // SimpleLogger::new().init().unwrap();
+    pretty_env_logger::init();
     info!("Running app");
     dotenv().ok();
     let http_port = get_http_port();
-    // GET /hello/warp => 200 OK with body "Hello, warp!"
-    let hello = warp::path!("hello" / String)
-        .map(|name| format!("Hello, {}!", name));
+
+    // GET /hi
+    let hi = warp::path("hi").map(|| "Hello, World!");
+
+    let public_directory = warp::fs::dir("public");
+
+    let routes = warp::get().and(hi.or(public_directory));
 
     info!("App is running on {}", http_port);
-    warp::serve(hello)
-        .run(([127, 0, 0, 1], http_port))
-        .await;
+    warp::serve(routes).run(([127, 0, 0, 1], http_port)).await;
 }
