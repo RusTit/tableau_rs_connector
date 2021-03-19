@@ -22,10 +22,10 @@ fn get_http_port() -> u16 {
 
 #[tokio::main]
 async fn main() {
+    dotenv().ok();
     // SimpleLogger::new().init().unwrap();
     pretty_env_logger::init();
     info!("Running app");
-    dotenv().ok();
     let http_port = get_http_port();
 
     // GET /hi
