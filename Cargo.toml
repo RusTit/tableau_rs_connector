@@ -1,0 +1,14 @@
+[package]
+name = "tableau_rs_connector"
+version = "0.1.0"
+authors = ["Russkih Anatoly <titanofdarkness@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+warp = "0.3"
+dotenv = "0.15.0"
+log = "0.4.14"
+simple_logger = "1.11.0"
