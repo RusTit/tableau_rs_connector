@@ -36,5 +36,5 @@ async fn main() {
     let routes = warp::get().and(hi.or(public_directory));
 
     info!("App is running on {}", http_port);
-    warp::serve(routes).run(([127, 0, 0, 1], http_port)).await;
+    warp::serve(routes).run(([0, 0, 0, 0], http_port)).await;
 }
