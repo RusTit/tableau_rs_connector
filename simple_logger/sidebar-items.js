@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["init","See this"],["init_by_env","See this"],["init_with_level","See this"]],"struct":[["SimpleLogger",""]]});
