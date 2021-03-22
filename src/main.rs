@@ -2,7 +2,6 @@ use log::info;
 use std::env;
 use warp::Filter;
 // use simple_logger::SimpleLogger;
-use pretty_env_logger;
 extern crate dotenv;
 
 use dotenv::dotenv;
