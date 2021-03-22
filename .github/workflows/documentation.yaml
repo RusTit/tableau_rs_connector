@@ -32,8 +32,8 @@ jobs:
       - name: Create documentation 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: |
           cargo doc
-          echo '<meta http-equiv="refresh" content="0; url=acoustic_ftp_rust/index.html">' >> target/doc/index.html
-          echo '<a href="acoustic_ftp_rust/index.html">Redirect</a>' >> target/doc/index.html
+          echo '<meta http-equiv="refresh" content="0; url=tableau_rs_connector/index.html">' >> target/doc/index.html
+          echo '<a href="tableau_rs_connector/index.html">Redirect</a>' >> target/doc/index.html
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
