@@ -16,7 +16,7 @@ fn get_http_port() -> u16 {
             return port;
         }
     }
-    DEFAULT_HTTP_PORT
+    return DEFAULT_HTTP_PORT;
 }
 
 #[tokio::main]
@@ -27,12 +27,18 @@ async fn main() {
     info!("Running app");
     let http_port = get_http_port();
 
-    // GET /hi
-    let hi = warp::path("hi").map(|| "Hello, World!");
+    let proxy_route = warp::any()
+        .and(warp::path("proxy"))
+        // Only accept bodies smaller than 16kb...
+        .and(warp::path::param::<String>())
+        .map(|url: String| {
+            info!("Url: {}", url);
+            warp::reply::json(&url)
+        });
 
     let public_directory = warp::fs::dir("public");
 
-    let routes = warp::get().and(hi.or(public_directory));
+    let routes = proxy_route.or(public_directory);
 
     info!("App is running on {}", http_port);
     warp::serve(routes).run(([0, 0, 0, 0], http_port)).await;
