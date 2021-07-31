@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["init","See this"],["init_by_env","See this"],["init_with_level","See this"]],"struct":[["SimpleLogger",""]]});
+initSidebarItems({"fn":[["init","Initialise the logger with it’s default configuration."],["init_by_env","Use [`init_with_env`] instead."],["init_with_env","Initialise the logger with the `RUST_LOG` environment variable."],["init_with_level","Initialise the logger with a specific log level."]],"struct":[["SimpleLogger","Implements [`Log`] and a set of simple builder methods for configuration."]]});
