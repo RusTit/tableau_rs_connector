@@ -16,7 +16,7 @@ fn get_http_port() -> u16 {
             return port;
         }
     }
-    return DEFAULT_HTTP_PORT;
+    DEFAULT_HTTP_PORT
 }
 
 #[tokio::main]
